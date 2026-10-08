@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Necklace - Interactive Ebook</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #eef2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1.book-title {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+    }
+
+    .book-container {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      padding: 40px;
+      min-height: 600px;
+      position: relative;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Text Page Styles */
+    .text-page {
+      border: 1px solid #c8b99d;
+      padding: 30px;
+      background-color: #fdfbf7;
+      line-height: 1.6;
+      color: #222;
+      font-size: 15px;
+    }
+
+    .text-page h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+    .text-page h3 {
+      text-align: center;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: italic;
+      margin-bottom: 25px;
+      color: #555;
+    }
+
+    .text-page p {
+      margin-bottom: 16px;
+      text-align: justify;
+      text-indent: 20px;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: #777;
+    }
+
+    /* Photo/Image Page Styles */
+    .photo-page {
+      background-color: #fafafa;
+      border: 2px dashed #ccc;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      max-width: 500px;
+      height: 350px;
+      border: 2px dashed #a0a0a0;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .photo-placeholder:hover {
+      background-color: #e8e8e8;
+    }
+
+    .photo-placeholder img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    /* Navigation */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #34495e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn:disabled {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+    }
+
+    .page-indicator {
+      font-size: 16px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="book-title">The Necklace — Ebook</h1>
+
+  <div class="book-container">
+
+    <!-- PAGE 1: Text (Page 19) -->
+    <div class="page text-page active" id="page-1">
+      <h2>The Necklace</h2>
+      <h3>by Guy de Maupassant</h3>
+      <p>She was one of those pretty and charming girls born, as though fate had blundered over her, into a family of artisans. She had no marriage portion, no expectations, no means of getting known, understood, loved, and wedded by a man of wealth and distinction; and she let herself be married off to a little clerk in the Ministry of Education. Her tastes were simple because she had never been able to afford any other, but she was as unhappy as though she had married beneath her.</p>
+      <p>She suffered endlessly, feeling herself born for every delicacy and luxury. She suffered from the poorness of her house, from its mean walls, worn chairs, and ugly curtains. All these things, of which other women of her class would not even have been aware, tormented and insulted her...</p>
+      <div class="page-number">Page 1 (19)</div>
+    </div>
+
+    <!-- PAGE 2: Photo Placeholder -->
+    <div class="page photo-page" id="page-2">
+      <div class="photo-placeholder" onclick="alert('Add your custom photo or image URL here!')">
+        <p>📷 <strong>Click or Insert Photo Here</strong></p>
+        <p style="font-size: 12px; margin-top: 8px;">(Photo space corresponding to Page 19)</p>
+      </div>
+      <div class="page-number">Page 2</div>
+    </div>
+
+    <!-- PAGE 3: Text (Page 20) -->
+    <div class="page text-page" id="page-3">
+      <p>attractive and sought after. She had a rich friend, an old school friend whom she refused to visit, because she suffered so keenly when she returned home. She would weep whole days, with grief, regret, despair, and misery.</p>
+      <p>One evening her husband came home with an exultant air, holding a large envelope in his hand. "Here's something for you," he said. Swiftly she tore the paper and drew out a printed card on which were these words: "The Minister of Education and Madame Ramponneau request the pleasure of the company of Monsieur and Madame Loisel at the Ministry on the evening of Monday, January the 18th."...</p>
+      <div class="page-number">Page 3 (20)</div>
+    </div>
+
+    <!-- PAGE 4: Photo Placeholder -->
+    <div class="page photo-page" id="page-4">
+      <div class="photo-placeholder">
+        <p>📷 <strong>Click or Insert Photo Here</strong></p>
+        <p style="font-size: 12px; margin-top: 8px;">(Photo space corresponding to Page 20)</p>
+      </div>
+      <div class="page-number">Page 4</div>
+    </div>
+
+    <!-- PAGE 5: Text (Page 21) -->
+    <div class="page text-page" id="page-5">
+      <p>Nanterre with some friends who went lark-shooting there on Sundays. Nevertheless he said: "Very well. I'll give you four hundred francs. But try and get a really nice dress with the money."</p>
+      <p>The day of the party drew near, and Madame Loisel seemed sad, uneasy and anxious. Her dress was ready, however. One evening her husband said to her: "What's the matter with you? You've been very odd for the last three days." "I'm utterly miserable
